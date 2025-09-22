@@ -9,16 +9,36 @@ FROM customer
 where status = 'Active';
 
 ```
+| TOTAL_ACTIVE_CUSTOMERS |
+|---|
+| 25 |
 
+``` SQL
 ## customers from branch = Auckland
 
 Select Name 
 From CUSTOMER as c
 join branch as b on c.branch_id = b.branch_id
 where city = 'Auckland';
+```
+| Name |
+|---|
+| Terrence Gregory |
+| Steven Banks |
+| Mark Harris |
+| Kristen Gibson |
+| Andrew Foster |
+| Brandon Wilkerson |
+| Melissa Knight |
+| Richard Parker |
+| Dr. Donna Riddle |
+| Dean Black |
+| Anthony Boyd |
+| Olivia Anderson |
+| Daniel Mccarthy |
+| Travis Case |
 
-
-
+``` SQL
 #All transactions greater than 50000
 
 select c.name, SUM(t.AMOUNT) as total_transaction 
@@ -28,7 +48,17 @@ join TRANSACTION as t on a.account_id = t.ACCOUNT_ID
 Group by c.name
 HAVING ABS(total_transaction) > 50000
 Order by total_transaction DESC;
+```
+| NAME | TOTAL_TRANSACTION |
+|---|---|
+| Julian Jackson | 53926.00 |
+| Brandi Li | 52908.20 |
+| Tyler Evans | -53650.76 |
+| Peter Moore | -60334.99 |
+| James Morrow | -61303.24 |
+| Charles Mckay | -81166.72 |
 
+``` SQL
 # top 10 withdrawals by largest amount
 
 select c.name, SUM(t.AMOUNT) as total_transaction 
@@ -39,7 +69,21 @@ Where t.transaction_type = 'Debit'
 group by c.name
 order by ABS(SUM(t.amount)) DESC
 limit 10;
+```
+| NAME | TOTAL_TRANSACTION |
+|---|---|
+| Steven Banks | -414970.31 |
+| Julian Jackson | -256544.03 |
+| James Morrow | -247741.93 |
+| Brandon Wilkerson | -246139.81 |
+| Andrew Foster | -238317.35 |
+| Kirsten Turner | -205018.84 |
+| Charles Mckay | -199306.25 |
+| Erica Small | -192266.61 |
+| Brandi Li | -191289.47 |
+| Diana Leon | -185959.83 |
 
+``` SQL 
 #total deposits by branch
 
 Select b.branch_name, SUM(t.AMOUNT) as total_deposits
@@ -50,13 +94,26 @@ join transaction as t on a.account_id = t.account_id
 where t.transaction_type = 'Credit'
 group by b.branch_name
 order by total_deposits DESC;
+```
+| BRANCH_NAME | TOTAL_DEPOSITS |
+|---|---|
+| Auckland CBD | 1770492.41 |
+| Wellington Central | 1361483.55 |
+| Christchurch South | 1304433.70 |
+| Hamilton Central | 911250.11 |
 
+``` SQL
 #average balance by account type
 
 select account_type, ROUND(AVG(BALANCE), 2) as Avg_bal
 from Account
 Group by account_type
 order by Avg_bal DESC;
+```
+| ACCOUNT_TYPE | AVG_BAL |
+|---|---|
+| Checking | 54770.86 |
+| Savings | 44122.52 |
 
 #get min and max balance 
 
