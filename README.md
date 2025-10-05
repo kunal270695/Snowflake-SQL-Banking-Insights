@@ -512,7 +512,6 @@ from Account
 | 57803.23 | Platinum |
 | 34458.31 | Gold |
 
-###############Sub-Queries###################
 
 ``` SQL
 # salaries above average
